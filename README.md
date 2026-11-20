@@ -16,7 +16,7 @@ Google の AI コーディング環境 Antigravity のプラグインです。Go
 
 ## 自分の PC に入れられないとき（Google Cloud Shell）
 
-ブラウザだけで進められます。下のボタンを押し、個人の Gmail でログインして、「信頼する」を選んで開きます。右側に手順が出るので、コマンドを1つ実行し、Antigravity にログインします。詳しい手順は [docs/cloud-shell.md](docs/cloud-shell.md) にあります。
+ブラウザだけで進められます。下のボタンを押し、個人の Gmail でログインして、「リポジトリを信頼する」にチェックを入れて「確認」を押します。右側に手順が出るので、コマンドを1つ実行し、Antigravity にログインします。詳しい手順は [docs/cloud-shell.md](docs/cloud-shell.md) にあります。
 
 [![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://shell.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2FGScale-jp%2Fai-challenge-kit&cloudshell_git_branch=main&cloudshell_tutorial=docs%2Fcloudshell-tutorial.md&cloudshell_workspace=.)
 
