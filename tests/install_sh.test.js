@@ -82,4 +82,31 @@ test('Bash インストーラ（Cloud Shell）', { skip: windows }, async (t) =>
     assert.match(result.output, /Google OAuth/);
     assert.match(result.output, /ウェブでプレビュー/);
   });
+
+  await t.test('Cloud Shell の部品の準備は裏で進め、インストールはすぐ終わる', (t) => {
+    const { env, home } = makeInstallEnv(t);
+    env.HOME = home;
+    // 通信は失敗させる（裏の準備はすぐ終わる）
+    Object.assign(env, { CLOUD_SHELL: 'true', https_proxy: 'http://127.0.0.1:9', HTTPS_PROXY: 'http://127.0.0.1:9' });
+    const started = Date.now();
+    const result = install(env);
+    assert.equal(result.status, 0, result.output);
+    assert.ok(Date.now() - started < 20000, 'インストールが部品の準備を待っている');
+    assert.match(result.output, /裏でダウンロード/);
+    const script = join(env.HOME, '.cache', 'ai-challenge-kit', 'setup.sh');
+    assert.ok(existsSync(script));
+    assert.equal(require('node:child_process').spawnSync('bash', ['-n', script]).status, 0);
+  });
+
+  await t.test('準備が済んでいれば、裏の準備は始めない', (t) => {
+    const { env, home } = makeInstallEnv(t);
+    env.HOME = home;
+    Object.assign(env, { CLOUD_SHELL: 'true' });
+    const cache = join(env.HOME, '.cache', 'ai-challenge-kit');
+    mkdirSync(cache, { recursive: true });
+    writeFileSync(join(cache, 'ready'), '');
+    const result = install(env);
+    assert.equal(result.status, 0, result.output);
+    assert.match(result.output, /準備は済んでいます/);
+  });
 });

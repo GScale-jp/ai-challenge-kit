@@ -150,7 +150,13 @@ cloud_shell_setup() {
     rm -rf -- "$dir/node_modules"
     ln -s -- "$cache/$skill/node_modules" "$dir/node_modules"
   done
-  (cd "$cache/build-app" && PATH="$node22/bin:$PATH" node node_modules/playwright/cli.js install chromium) || return 1
+  local try ok=0
+  for try in 1 2 3 4 5; do
+    if (cd "$cache/build-app" && PATH="$node22/bin:$PATH" node node_modules/playwright/cli.js install chromium); then ok=1; break; fi
+    printf 'Chromium のダウンロードに失敗しました（%s 回目）。30秒後にやり直します。\n' "$try"
+    sleep 30
+  done
+  [ "$ok" = 1 ] || return 1
   chrome=$(ls -d "$HOME"/.cache/ms-playwright/chromium_headless_shell-*/chrome-*/chrome-headless-shell 2>/dev/null | tail -1)
   if [ -n "$chrome" ] && ldd "$chrome" 2>/dev/null | grep -q 'not found'; then
     (cd "$cache/build-app" && sudo env "PATH=$node22/bin:$PATH" node node_modules/playwright/cli.js install-deps chromium) || return 1
@@ -158,9 +164,22 @@ cloud_shell_setup() {
   printf '%s\n' 'Cloud Shell 用の準備が終わりました。'
 }
 
+# 会場の回線が混むと Chromium（約170MB）のダウンロードに10分以上かかる（2026-11-20 会場で発生）ので、
+# Cloud Shell 用の準備は裏で進め、インストールはすぐ終える。準備が要るのは画面確認・動画・スライドの段だけ。
 if [ "${CLOUD_SHELL:-}" = true ] && [ "${AICK_SKIP_PLAYWRIGHT:-0}" != 1 ]; then
-  if ! cloud_shell_setup; then
-    printf '%s\n' 'Playwright の準備に失敗しました。もう一度このコマンドを実行してください。' >&2
+  aick_cache="$HOME/.cache/ai-challenge-kit"
+  mkdir -p -- "$aick_cache"
+  if [ -f "$aick_cache/ready" ]; then
+    printf '%s\n' 'Cloud Shell 用の準備は済んでいます。'
+  elif [ "${AICK_FOREGROUND_SETUP:-0}" = 1 ]; then
+    cloud_shell_setup && touch "$aick_cache/ready" || printf '%s\n' 'Playwright の準備に失敗しました。もう一度このコマンドを実行してください。' >&2
+  else
+    setup_script="$aick_cache/setup.sh"
+    { printf 'plugin=%q\n' "$plugin"; declare -f cloud_shell_setup; printf '%s\n' 'cloud_shell_setup && touch "$HOME/.cache/ai-challenge-kit/ready"'; } >"$setup_script"
+    rm -f -- "$aick_cache/ready"
+    nohup setsid bash "$setup_script" >"$aick_cache/setup.log" 2>&1 </dev/null &
+    printf '%s\n' '画面確認・動画・スライドで使う部品（Chromium）を、裏でダウンロードしています。待たずに先へ進めます。'
+    printf '%s\n' '進み具合は tail -f ~/.cache/ai-challenge-kit/setup.log で見られます（「Cloud Shell 用の準備が終わりました」で完了）。'
   fi
 fi
 if [ "${CLOUD_SHELL:-}" = true ]; then

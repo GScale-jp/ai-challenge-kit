@@ -20,7 +20,7 @@ Cloud Shell は個人の Gmail（@gmail.com）で使います。
 curl -fsSL https://raw.githubusercontent.com/GScale-jp/ai-challenge-kit/main/install/install.sh | bash -s -- --yes
 ```
 
-初回は5分ほどかかります。「Cloud Shell 用の準備が終わりました」と出たら完了です。
+1分ほどで終わり、次の手順の案内が出ます。画面確認・動画・スライドで使う部品は裏でダウンロードが続くので、待たずに先へ進んでください（進み具合は `tail -f ~/.cache/ai-challenge-kit/setup.log` で見られます）。
 
 ## Antigravity にログイン
 
