@@ -1,0 +1,2 @@
+/ai-challenge-kit:build-app
+初回の準備（npm install と npx playwright install chromium）は私が了承済みです。あなたが実行して、check_app.mjs での動作確認まで最後まで進めてください。

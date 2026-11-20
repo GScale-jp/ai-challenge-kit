@@ -1,0 +1,2 @@
+/ai-challenge-kit:demo-video
+確認は不要です。台本を challenge/video_script.md に保存し、末尾の「自動作成用の場面データ」の JSON まで書いてください。appUrl は app/index.html、導入と3場面の合計は90秒以内にしてください。

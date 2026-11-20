@@ -1,0 +1,7 @@
+{
+  "name": "ai-challenge-kit-build-app",
+  "private": true,
+  "type": "module",
+  "description": "build-app スキルのスクリプト用の依存",
+  "dependencies": { "playwright": "1.58.2" }
+}

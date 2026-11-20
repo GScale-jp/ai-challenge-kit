@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ja">
+<meta charset="utf-8">
+<title>ラベルのない応募フォームのテスト</title>
+<form id="entry">
+  <section>
+    <h2>応募者情報</h2>
+    <input id="name" name="name" required>
+    <input id="email" name="contact" type="email" required>
+    <input id="pen_name" name="pen_name">
+  </section>
+  <section>
+    <h2>作品情報</h2>
+    <input id="title" name="title" required>
+    <textarea id="summary" name="summary" required></textarea>
+    <input type="radio" name="category" value="life" required>
+    <input type="radio" name="category" value="work">
+    <input type="radio" name="category" value="future">
+    <input type="url" id="youtube_url" name="youtube_url" required>
+    <textarea id="pr" name="pr"></textarea>
+    <input type="url" id="product_url" name="product_url">
+    <textarea id="story_background" name="story_background"></textarea>
+    <textarea id="story_ai_usage" name="story_ai_usage"></textarea>
+    <textarea id="story_impact" name="story_impact"></textarea>
+    <input type="checkbox" name="ai_tools" value="gemini">
+    <input type="checkbox" name="ai_tools" value="notebook">
+    <input type="checkbox" name="ai_tools" value="studio">
+    <input type="checkbox" name="ai_tools" value="antigravity">
+    <input type="checkbox" name="ai_tools" value="other">
+    <input type="checkbox" id="consent-privacy" required>
+    <input type="checkbox" id="consent-rules" required>
+    <input type="checkbox" id="consent-age" required>
+    <button type="submit" id="submit-entry">送信</button>
+  </section>
+</form>
+<script>
+  window.__submitted = false;
+  window.__consentTouched = false;
+  document.querySelector('#submit-entry').addEventListener('click', () => { window.__submitted = true; });
+  document.querySelector('#entry').addEventListener('submit', event => {
+    event.preventDefault();
+    window.__submitted = true;
+  });
+  for (const checkbox of document.querySelectorAll('[id^="consent-"]')) {
+    checkbox.addEventListener('change', () => { window.__consentTouched = true; });
+  }
+</script>
+</html>

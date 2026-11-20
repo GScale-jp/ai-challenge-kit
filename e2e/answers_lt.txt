@@ -1,0 +1,3 @@
+/ai-challenge-kit:lt-slides
+自己紹介の一言は「家族の備えを見える化したい、コザの住人です」です。デモの URL は entry_form.json の youtube_url を使ってください。応募はこれからします。
+初回の準備（npm install と npx playwright install chromium）は私が了承済みです。あなたが実行して、deck.json の作成、check_deck.mjs の検査、build_deck.mjs による challenge/lt/lt.html と lt.pdf の作成まで最後まで進めてください。

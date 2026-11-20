@@ -1,0 +1,4 @@
+/ai-challenge-kit:prototype-check
+おまかせ
+はい、この点検案で進めてください。作る形は静的 Web アプリでお願いします。
+challenge/prototype_check.md に保存して、進み具合の記録まで最後まで進めてください。

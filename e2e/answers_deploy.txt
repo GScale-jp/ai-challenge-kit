@@ -1,0 +1,3 @@
+/ai-challenge-kit:deploy
+作った形は GAS Web アプリです。ただしこれは検査なので、ワークスペース直下の gas-app/（Code.gs・index.html・appsscript.json はそろっています）を使い、実際のログインや公開はしません。deploy_gas.mjs を --title "備えのチェック" --access MYSELF --dry-run で実行し、その出力をそのまま challenge/deploy_dry_run.txt に保存してください。clasp は実行しないでください。
+確認は済んでいます。challenge/deploy.md には、公開方法に「GAS Web アプリ（dry-run のみ・未公開）」、URL に「（未公開）」、公開範囲に「自分だけ（MYSELF）」と書いて保存し、進み具合の記録まで最後まで進めてください。

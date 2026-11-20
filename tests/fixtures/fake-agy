@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -eu
+
+printf '%s\n' "$*" >> "$FAKE_AGY_LOG"
+case "$1 ${2:-}" in
+  'plugin list')
+    if [ "${FAKE_AGY_LIST_FAIL:-0}" = 1 ]; then exit 1; fi
+    if [ "${FAKE_AGY_INSTALLED:-0}" = 1 ]; then printf '%s\n' ai-challenge-kit; fi
+    ;;
+  'plugin install')
+    if [ -n "${FAKE_AGY_SEEN:-}" ] && [ -d "$3" ]; then ls -A "$3" >> "$FAKE_AGY_SEEN"; fi
+    if [ "${FAKE_AGY_FAIL_URL:-0}" = 1 ] && [[ "$3" == https://* ]]; then
+      printf '%s\n' 'URLからインストールできません。' >&2
+      exit 1
+    fi
+    if [ "${FAKE_AGY_CONFLICT:-0}" = 1 ]; then
+      while IFS= read -r line; do
+        if [ "$line" = 'plugin uninstall ai-challenge-kit' ]; then exit 0; fi
+      done < "$FAKE_AGY_LOG"
+      printf '%s\n' 'プラグインはすでに存在します。' >&2
+      exit 1
+    fi
+    ;;
+esac

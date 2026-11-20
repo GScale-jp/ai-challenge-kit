@@ -1,0 +1,15 @@
+{
+  "name": "ai-challenge-kit",
+  "displayName": "Google AI Challenge キット",
+  "description": "Google AI Challenge（締切 2026/11/30）に応募できる形まで、Antigravity の中で進めるキット。アイデア出しから、壁打ち・アプリ作成・公開・デモ動画の作成・応募フォームへの入力・LT スライドまで。Google Cloud クレジットの受け取り案内つき。",
+  "version": "1.0.0",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "/ai-challenge-kit:challenge で応募までの段取りを始める",
+    "/ai-challenge-kit:idea-spark でアイデアを出す",
+    "/ai-challenge-kit:voucher で Google Cloud クレジットを受け取る"
+  ],
+  "author": { "name": "GScale" },
+  "homepage": "https://github.com/GScale-jp/ai-challenge-kit",
+  "repository": "https://github.com/GScale-jp/ai-challenge-kit"
+}

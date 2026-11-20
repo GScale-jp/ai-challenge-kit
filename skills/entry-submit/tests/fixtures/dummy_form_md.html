@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+<meta charset="utf-8">
+<title>応募フォームのテスト（実物と同じ構造）</title>
+<!--
+  実物の応募フォーム（2026-11-19 に確認）と同じ作りのダミーです。
+  タブは無く、1ページに見出しが並びます。入力欄は md-outlined-text-field（Shadow DOM の中に
+  input か textarea）、選択は md-radio と md-checkbox です。部品は name 属性で見分けます。
+-->
+<style>md-outlined-text-field { display:block; margin: 8px 0 } md-radio, md-checkbox { display:inline-block; width:24px; height:24px; border:1px solid #888 } [checked] { background:#9cf }</style>
+<form id="entry">
+  <nav role="tablist"><a role="tab" href="#">応募フォーム</a><a role="tab" href="#">募集要項</a></nav>
+  <h2>応募者情報</h2>
+  <md-outlined-text-field name="fullname" label="名前（フルネーム）" type="text" required></md-outlined-text-field>
+  <md-outlined-text-field name="secondaryname" label="ペンネーム" type="text"></md-outlined-text-field>
+  <md-outlined-text-field name="email" label="連絡先メールアドレス" type="email" required></md-outlined-text-field>
+  <h2>作品情報</h2>
+  <md-outlined-text-field name="ideatitle" label="アイデアのタイトル" type="text" required></md-outlined-text-field>
+  <md-outlined-text-field name="overviewidea" label="アイデアの概要（100 文字以内推奨）" type="textarea" rows="2" required></md-outlined-text-field>
+  <fieldset><legend>応募カテゴリー</legend>
+    <label><md-radio name="category" value="暮らしと家族の部門"></md-radio>暮らしと家族の部門</label>
+    <label><md-radio name="category" value="はたらく-まなぶ部門"></md-radio>はたらく・まなぶ部門</label>
+    <label><md-radio name="category" value="まちと地球の未来部門"></md-radio>まちと地球の未来部門</label>
+  </fieldset>
+  <fieldset><legend>主に使用した AI ツール（複数選択可）</legend>
+    <label><md-checkbox name="tool" value="gemini"></md-checkbox>Gemini</label>
+    <label><md-checkbox name="tool" value="gemini-notebook"></md-checkbox>Gemini Notebook</label>
+    <label><md-checkbox name="tool" value="google-ai-studio"></md-checkbox>Google AI Studio</label>
+    <label><md-checkbox name="tool" value="google-antigravity"></md-checkbox>Google Antigravity</label>
+    <label><md-checkbox name="tool" value="その他"></md-checkbox>その他</label>
+  </fieldset>
+  <md-outlined-text-field name="toolother" label="その他（具体名記載）" type="text"></md-outlined-text-field>
+  <md-outlined-text-field name="demovideourl" label="デモ動画 URL（90 秒以内推奨）" type="text" required></md-outlined-text-field>
+  <h2>作品の PR</h2>
+  <md-outlined-text-field name="insightspurpose" label="背景（Insight &amp; Purpose）（400 文字以内推奨）" type="textarea" required></md-outlined-text-field>
+  <md-outlined-text-field name="creativityhow" label="AI の使い方・工夫（Creativity &amp; How）（400 文字以内推奨）" type="textarea" required></md-outlined-text-field>
+  <md-outlined-text-field name="impactscalability" label="生まれた変化・広がり（Impact &amp; Scalability）（400 文字以内推奨）" type="textarea" required></md-outlined-text-field>
+  <md-outlined-text-field name="urlofthedemo" label="成果物・制作物 URL" type="textarea"></md-outlined-text-field>
+  <h2>応募前の同意事項</h2>
+  <label><md-checkbox name="termsandprivacy" value="true"></md-checkbox>プライバシーポリシー及び個人情報の取扱いについて同意する*</label>
+  <label><md-checkbox name="application-guidelines" value="true"></md-checkbox>募集要項・応募規約の全ての内容に同意する*</label>
+  <label><md-checkbox name="older-than-18" value="true"></md-checkbox>私は 18 歳以上です*</label>
+  <button type="submit" id="submit-entry">送信する</button>
+  <button type="reset">クリア</button>
+</form>
+<script>
+  window.__submitted = false;
+  window.__consentTouched = false;
+  class Field extends HTMLElement {
+    connectedCallback() {
+      const root = this.attachShadow({ mode: 'open' });
+      const area = this.getAttribute('type') === 'textarea';
+      const input = document.createElement(area ? 'textarea' : 'input');
+      if (!area) input.type = this.getAttribute('type');
+      input.setAttribute('aria-label', this.getAttribute('name'));
+      input.placeholder = this.getAttribute('label');
+      input.required = this.hasAttribute('required');
+      input.addEventListener('input', () => { this.value = input.value; });
+      root.append(input);
+    }
+  }
+  class Toggle extends HTMLElement {
+    connectedCallback() {
+      this.checked = false;
+      this.addEventListener('click', () => {
+        if (this.localName === 'md-radio') {
+          for (const other of document.querySelectorAll(`md-radio[name="${this.getAttribute('name')}"]`)) {
+            other.checked = false; other.removeAttribute('checked');
+          }
+        }
+        this.checked = this.localName === 'md-radio' ? true : !this.checked;
+        this.toggleAttribute('checked', this.checked);
+        if (this.closest('fieldset') === null) { window.__consentTouched = true; fetch('/__event?consent').catch(() => {}); }
+      });
+    }
+  }
+  customElements.define('md-outlined-text-field', Field);
+  customElements.define('md-radio', class extends Toggle {});
+  customElements.define('md-checkbox', class extends Toggle {});
+  document.querySelector('#entry').addEventListener('submit', event => { event.preventDefault(); window.__submitted = true; fetch('/__event?submit').catch(() => {}); });
+  document.querySelector('#submit-entry').addEventListener('click', () => { window.__submitted = true; fetch('/__event?submit-click').catch(() => {}); });
+</script>
+</html>

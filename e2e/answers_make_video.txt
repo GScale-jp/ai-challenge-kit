@@ -1,0 +1,2 @@
+/ai-challenge-kit:make-video
+初回の準備（npm install と npx playwright install chromium）は私が了承済みです。あなたが実行して、challenge/demo.webm を作るところまで最後まで進めてください。場面データに問題があれば台本を直してください。

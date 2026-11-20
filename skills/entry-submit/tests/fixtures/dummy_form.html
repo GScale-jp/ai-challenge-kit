@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ja">
+<meta charset="utf-8">
+<title>応募フォームのテスト</title>
+<form id="entry">
+  <div role="tablist" aria-label="応募フォーム">
+    <button type="button" role="tab" id="applicant-tab" aria-controls="applicant" aria-selected="true">応募者情報</button>
+    <button type="button" role="tab" id="work-tab" aria-controls="work" aria-selected="false">作品情報</button>
+  </div>
+  <section id="applicant" role="tabpanel" aria-labelledby="applicant-tab">
+    <div><label for="name">お名前 *</label><input id="name" name="name" required></div>
+    <div><input id="email" name="email" type="email" title="連絡用メール" required></div>
+    <div><label for="pen_name">ペンネーム</label><input id="pen_name" name="pen_name"></div>
+  </section>
+  <section id="work" role="tabpanel" aria-labelledby="work-tab" hidden>
+    <div><label for="title">アイデアのタイトル *</label><input id="title" name="title" required></div>
+    <div><label for="summary">アイデア概要 *</label><textarea id="summary" name="summary" required></textarea></div>
+    <fieldset id="categories">
+      <legend>応募カテゴリー</legend>
+      <label><input type="radio" name="category" value="life" required>暮らしと家族の部門</label>
+      <label><input type="radio" name="category" value="work">はたらく・まなぶ部門</label>
+      <label><input type="radio" name="category" value="future">まちと地球の未来部門</label>
+    </fieldset>
+    <div><label for="youtube_url">YouTube 限定公開 URL</label><input type="url" id="youtube_url" name="youtube_url" required></div>
+    <div><label for="pr">作品の PR（任意）</label><textarea id="pr" name="pr"></textarea></div>
+    <div><label for="product_url">成果物 URL</label><input type="url" id="product_url" name="product_url"></div>
+    <div><label for="story_background">課題の背景</label><textarea id="story_background" name="story_background"></textarea></div>
+    <div><label for="story_ai_usage">Google AI の使い方</label><textarea id="story_ai_usage" name="story_ai_usage"></textarea></div>
+    <div><label for="story_impact">生んだ変化や広がり</label><textarea id="story_impact" name="story_impact"></textarea></div>
+    <fieldset id="tools">
+      <legend>主に使用した AI ツール（複数選択可）</legend>
+      <label><input type="checkbox" name="ai_tools" value="gemini">Gemini</label>
+      <label><input type="checkbox" name="ai_tools" value="notebook">Gemini Notebook</label>
+      <label><input type="checkbox" name="ai_tools" value="studio">Google AI Studio</label>
+      <label><input type="checkbox" name="ai_tools" value="antigravity">Google Antigravity</label>
+      <label><input type="checkbox" name="ai_tools" value="other">その他</label>
+    </fieldset>
+    <fieldset id="agreements">
+      <legend>応募前の同意事項</legend>
+      <label><input type="checkbox" id="consent-privacy" required>プライバシーポリシーと個人情報の取扱いに同意する</label>
+      <label><input type="checkbox" id="consent-rules" required>募集要項と応募規約に同意する</label>
+      <label><input type="checkbox" id="consent-age" required>私は 18 歳以上です</label>
+    </fieldset>
+    <button type="submit" id="submit-entry">送信</button>
+  </section>
+</form>
+<script>
+  window.__submitted = false;
+  window.__consentTouched = false;
+  document.querySelector('#submit-entry').addEventListener('click', () => { window.__submitted = true; });
+  document.querySelector('#entry').addEventListener('submit', event => {
+    event.preventDefault();
+    window.__submitted = true;
+  });
+  for (const checkbox of document.querySelectorAll('#agreements input')) {
+    checkbox.addEventListener('change', () => { window.__consentTouched = true; });
+  }
+  const tabs = document.querySelectorAll('[role="tab"]');
+  for (const tab of tabs) {
+    tab.addEventListener('click', () => {
+      for (const item of tabs) {
+        item.setAttribute('aria-selected', String(item === tab));
+        document.getElementById(item.getAttribute('aria-controls')).hidden = item !== tab;
+      }
+    });
+  }
+</script>
+</html>

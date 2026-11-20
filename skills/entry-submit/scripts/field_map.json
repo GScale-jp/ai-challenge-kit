@@ -1,0 +1,202 @@
+{
+  "fields": {
+    "name": {
+      "labels": [
+        "名前（フルネーム）",
+        "氏名",
+        "お名前",
+        "応募者氏名"
+      ],
+      "type": "text",
+      "tab": "応募者情報",
+      "controlName": "fullname"
+    },
+    "email": {
+      "labels": [
+        "連絡先メールアドレス",
+        "連絡用メール",
+        "連絡用メールアドレス",
+        "メールアドレス",
+        "連絡先メールアドレス"
+      ],
+      "type": "text",
+      "tab": "応募者情報",
+      "controlName": "email"
+    },
+    "pen_name": {
+      "labels": [
+        "ペンネーム",
+        "ペンネーム（任意）",
+        "ニックネーム"
+      ],
+      "type": "text",
+      "tab": "応募者情報",
+      "controlName": "secondaryname"
+    },
+    "title": {
+      "labels": [
+        "アイデアのタイトル",
+        "アイデアタイトル",
+        "作品タイトル",
+        "タイトル"
+      ],
+      "type": "text",
+      "tab": "作品情報",
+      "controlName": "ideatitle"
+    },
+    "summary": {
+      "labels": [
+        "アイデアの概要（100 文字以内推奨）",
+        "アイデア概要",
+        "アイデアの概要",
+        "概要"
+      ],
+      "type": "textarea",
+      "tab": "作品情報",
+      "controlName": "overviewidea"
+    },
+    "category": {
+      "labels": [
+        "応募カテゴリー",
+        "応募カテゴリ",
+        "応募部門",
+        "部門"
+      ],
+      "type": "radio",
+      "tab": "作品情報",
+      "options": {
+        "暮らしと家族": [
+          "暮らしと家族",
+          "暮らしと家族の部門",
+          "暮らしと家族部門"
+        ],
+        "はたらく・まなぶ": [
+          "はたらく・まなぶ",
+          "はたらく・まなぶ部門"
+        ],
+        "まちと地球の未来": [
+          "まちと地球の未来",
+          "まちと地球の未来部門"
+        ]
+      },
+      "controlName": "category",
+      "values": {
+        "暮らしと家族": "暮らしと家族の部門",
+        "はたらく・まなぶ": "はたらく-まなぶ部門",
+        "まちと地球の未来": "まちと地球の未来部門"
+      }
+    },
+    "youtube_url": {
+      "labels": [
+        "デモ動画 URL（90 秒以内推奨）",
+        "YouTube 限定公開 URL",
+        "YouTube の限定公開 URL",
+        "YouTube URL",
+        "デモ動画の URL",
+        "動画 URL",
+        "動画のURL"
+      ],
+      "type": "text",
+      "tab": "作品情報",
+      "controlName": "demovideourl"
+    },
+    "product_url": {
+      "labels": [
+        "成果物・制作物 URL",
+        "成果物 URL",
+        "成果物の URL",
+        "成果物URL",
+        "作品の URL"
+      ],
+      "type": "text",
+      "tab": "作品情報",
+      "controlName": "urlofthedemo"
+    },
+    "story_background": {
+      "labels": [
+        "背景（Insight & Purpose）（400 文字以内推奨）",
+        "課題の背景",
+        "課題の背景（任意）",
+        "ストーリー：課題の背景"
+      ],
+      "type": "textarea",
+      "tab": "作品情報",
+      "controlName": "insightspurpose"
+    },
+    "story_ai_usage": {
+      "labels": [
+        "AI の使い方・工夫（Creativity & How）（400 文字以内推奨）",
+        "Google AI の使い方",
+        "Google AI の活用方法",
+        "Google AIの使い方",
+        "ストーリー：Google AI の使い方"
+      ],
+      "type": "textarea",
+      "tab": "作品情報",
+      "controlName": "creativityhow"
+    },
+    "story_impact": {
+      "labels": [
+        "生まれた変化・広がり（Impact & Scalability）（400 文字以内推奨）",
+        "生んだ変化や広がり",
+        "生んだ変化・広がり",
+        "ストーリー：生んだ変化や広がり"
+      ],
+      "type": "textarea",
+      "tab": "作品情報",
+      "controlName": "impactscalability"
+    },
+    "ai_tools": {
+      "labels": [
+        "主に使用した AI ツール",
+        "主に使用した AI ツール（複数選択可）",
+        "主に使用した AI ツールを選択してください（複数選択可）",
+        "使用した AI ツール"
+      ],
+      "type": "checkbox-group",
+      "tab": "作品情報",
+      "options": {
+        "Gemini": [
+          "Gemini"
+        ],
+        "Gemini Notebook": [
+          "Gemini Notebook"
+        ],
+        "Google AI Studio": [
+          "Google AI Studio"
+        ],
+        "Google Antigravity": [
+          "Google Antigravity"
+        ],
+        "その他": [
+          "その他"
+        ]
+      },
+      "controlName": "tool",
+      "values": {
+        "Gemini": "gemini",
+        "Gemini Notebook": "gemini-notebook",
+        "Google AI Studio": "google-ai-studio",
+        "Google Antigravity": "google-antigravity",
+        "その他": "その他"
+      }
+    }
+  },
+  "neverClick": [
+    "送信",
+    "submit",
+    "同意",
+    "consent",
+    "プライバシー",
+    "個人情報の取扱い",
+    "個人情報の取り扱い",
+    "応募規約",
+    "募集要項",
+    "18歳以上",
+    "termsandprivacy",
+    "application-guidelines",
+    "older-than-18",
+    "クリア",
+    "reset"
+  ]
+}

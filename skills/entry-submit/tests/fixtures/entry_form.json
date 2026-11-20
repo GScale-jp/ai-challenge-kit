@@ -1,0 +1,15 @@
+{
+  "name": "応募者サンプル",
+  "email": "applicant@example.invalid",
+  "pen_name": "作品サンプル",
+  "title": "家庭の備えチェック",
+  "summary": "防災の備えを確認する。\n家族で担当を分ける。",
+  "category": "暮らしと家族",
+  "youtube_url": "https://youtu.be/example0000",
+  "pr": "備えに必要な作業が分かります。",
+  "product_url": "https://example.invalid/app",
+  "story_background": "備えの分担が曖昧だった。",
+  "story_ai_usage": "Gemini が備えの候補を提案する。",
+  "story_impact": "未確認の作業が分かるようになった。",
+  "ai_tools": ["Gemini", "Google AI Studio", "Google Antigravity"]
+}

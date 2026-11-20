@@ -1,0 +1,65 @@
+name: CI
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: テスト（${{ matrix.os }}）
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - name: リポジトリを取得
+        uses: actions/checkout@v4
+      - name: Node.js 22 を準備
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: スクリプトの依存を入れる（make-video・lt-slides・entry-submit・build-app）
+        shell: bash
+        run: |
+          for skill in make-video lt-slides entry-submit build-app; do
+            (cd "skills/$skill/scripts" && npm ci)
+          done
+      - name: Chromium を入れる（Linux）
+        if: runner.os == 'Linux'
+        shell: bash
+        working-directory: skills/make-video/scripts
+        run: npx playwright install --with-deps chromium
+      - name: Chromium を入れる（macOS・Windows）
+        if: runner.os != 'Linux'
+        shell: bash
+        working-directory: skills/make-video/scripts
+        run: npx playwright install chromium
+      - name: テストを実行（Linux・macOS）
+        if: runner.os != 'Windows'
+        run: npm test
+      - name: テストを実行（Windows・PowerShell 7）
+        if: runner.os == 'Windows'
+        env:
+          AICK_REQUIRE_PWSH: '1'
+          AICK_PS_EXE: pwsh
+        shell: pwsh
+        run: npm test
+      - name: インストーラと配布クライアントを検証（Windows PowerShell 5.1）
+        if: runner.os == 'Windows' && !cancelled()
+        env:
+          AICK_REQUIRE_PWSH: '1'
+          AICK_PS_EXE: powershell.exe
+        shell: powershell
+        run: node --test tests/install_ps1.test.js tests/claim.test.js
+      - name: agy の厳格検証（macOS）
+        if: runner.os == 'macOS' && !cancelled()
+        timeout-minutes: 5
+        shell: bash
+        run: bash .github/scripts/agy_validate.sh
+      - name: agy の厳格検証（Windows）
+        if: runner.os == 'Windows' && !cancelled()
+        timeout-minutes: 5
+        shell: pwsh
+        run: ./.github/scripts/agy_validate.ps1

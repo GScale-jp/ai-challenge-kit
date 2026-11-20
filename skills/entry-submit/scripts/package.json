@@ -1,0 +1,7 @@
+{
+  "name": "ai-challenge-kit-entry-submit",
+  "private": true,
+  "type": "module",
+  "description": "entry-submit スキルのスクリプト用の依存",
+  "dependencies": { "playwright": "1.58.2" }
+}

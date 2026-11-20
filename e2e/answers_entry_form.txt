@@ -1,0 +1,5 @@
+/ai-challenge-kit:entry-form
+氏名は「テスト 太郎」、連絡先メールは e2e.fixture@example.invalid です。ペンネームはありません。
+タイトル案は1つ目を選びます。
+使った AI ツールは Gemini と Google Antigravity です。成果物の URL はありません。自分の言葉で書き足す一か所は、この例題のままで構いません。
+challenge/entry_form.md と challenge/entry_form.json（13個のキーすべて）を保存し、進み具合の記録まで最後まで進めてください。動画の URL は空のままで構いません。

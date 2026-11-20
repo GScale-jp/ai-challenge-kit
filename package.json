@@ -1,0 +1,7 @@
+{
+  "name": "ai-challenge-kit",
+  "private": true,
+  "scripts": {
+    "test": "node --test gas/test/*.test.js tests/*.test.js skills/*/tests/*.test.mjs"
+  }
+}

@@ -1,0 +1,4 @@
+/ai-challenge-kit:idea-spark
+おまかせ
+はい、この例題で進めてください。
+内容を challenge/idea.md に保存して、進み具合の記録まで最後まで進めてください。
