@@ -45,6 +45,7 @@ description: challenge/requirements.md をもとに、動画で見せられる�
    - Mac / Windows 共通（Node.js がある場合）: ターミナルで `npx serve app` を実行し、表示された URL を開く
    - Python がある場合: `python -m http.server -d app 8000`（Windows は `py -m http.server -d app 8000`）を実行し、http://localhost:8000 を開く
    - どちらも無い場合: `app/index.html` をダブルクリックして、ブラウザで直接開く
+   - **Google Cloud Shell の場合**（環境変数 `CLOUD_SHELL` が `true`）: Cloud Shell の中のファイルは手元のブラウザで直接開けない。ワークスペース直下で `python3 -m http.server 8080 -d app` を実行したままにし、Cloud Shell の画面右上の「ウェブでプレビュー」ボタンから「ポート 8080 でプレビュー」を選んで開くよう案内する（`localhost` の URL を案内しない）。止めるときは、そのターミナルで `Ctrl + C` を押す。Cloud Shell では Playwright と Chromium はインストーラが入れてあるので、手順8の確認はそのまま実行できる
 10. 最後に「**動画で見せる操作手順**」を3つ、番号つきで書いて参加者に見せる（画面で何を押し、何が起きるか）。
 11. `challenge/progress.md` があれば、画面で確認できていれば ⑤ アプリ作成を「済」にし（「画面での確認は未実施」のままなら「済」にせず、メモ欄に「作成済み・画面での確認は未実施」と書く）、メモ欄に動画で見せる操作手順3つを書き足す（無ければ作らず、/ai-challenge-kit:challenge を勧める）。
 12. 次は、アプリの URL がほしければ `/ai-challenge-kit:deploy`、そうでなければ `/ai-challenge-kit:demo-video` と勧めて終わる。

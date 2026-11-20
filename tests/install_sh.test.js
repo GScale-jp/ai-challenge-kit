@@ -72,3 +72,14 @@ test('Bash インストーラ', { skip: windows }, async (t) => {
     });
   }
 });
+
+test('Bash インストーラ（Cloud Shell）', { skip: windows }, async (t) => {
+  await t.test('Cloud Shell ではログインとウェブでプレビューを案内する', (t) => {
+    const { env } = makeInstallEnv(t);
+    Object.assign(env, { CLOUD_SHELL: 'true', AICK_SKIP_PLAYWRIGHT: '1' });
+    const result = install(env);
+    assert.equal(result.status, 0, result.output);
+    assert.match(result.output, /Google OAuth/);
+    assert.match(result.output, /ウェブでプレビュー/);
+  });
+});

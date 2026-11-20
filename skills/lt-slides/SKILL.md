@@ -33,7 +33,7 @@ description: 発表用のスライドと話す台本を作ります。「5分の
    node <スキルのフォルダ>/scripts/build_deck.mjs
    ```
 
-6. `challenge/lt/lt.html` をブラウザで開きます。発表画面の表示にはインターネット接続が必要です。F キーで全画面にし、S キーで発表者ノートを開けます。印刷や会場で回線が使えないときは `challenge/lt/lt.pdf` を使います。
+6. `challenge/lt/lt.html` をブラウザで開きます。発表画面の表示にはインターネット接続が必要です。F キーで全画面にし、S キーで発表者ノートを開けます。印刷や会場で回線が使えないときは `challenge/lt/lt.pdf` を使います。 Google Cloud Shell（環境変数 `CLOUD_SHELL` が `true`）では、ワークスペース直下で `cloudshell download challenge/lt/lt.pdf` を実行して自分の PC に保存し、HTML の発表画面を見るときは `python3 -m http.server 8080 -d challenge/lt` を実行したまま、画面右上の「ウェブでプレビュー」から「ポート 8080 でプレビュー」を選び、`lt.html` を開きます。
 7. `challenge/lt/script.md` を最初から声に出して読みます。デモの操作や画面を切り替える時間も含め、5分以内に収まるか練習するよう勧めます。
 8. `challenge/progress.md` があれば「LT スライド」を「済」にします。該当の段がまだ無ければ「メモ」に「LT スライド：済（challenge/lt/lt.html）」を追記します。ファイルが無ければ作らず、/ai-challenge-kit:challenge を勧めます。
 

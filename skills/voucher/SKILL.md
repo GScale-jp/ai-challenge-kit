@@ -37,6 +37,7 @@ description: 11/20 の勉強会で配られる Google Cloud クレジットの�
 6. redeem のページ（https://cloud.google.com/redeem）を**ブラウザで開いてよいか聞く**。「はい」と言われたときだけ開く。
    - Mac: `open "https://cloud.google.com/redeem"`
    - Windows: `Start-Process "https://cloud.google.com/redeem"`
+   - Google Cloud Shell（環境変数 `CLOUD_SHELL` が `true`）: コマンドでは開けないので、URL を表示し、本人に自分の PC のブラウザで開いてもらう。
 7. 最後に、**予算アラート**の設定を勧める。https://console.cloud.google.com/billing/budgets で、予算額（クレジットの額の半分など）とメール通知を設定しておくと、使いすぎに気づける。
 8. `challenge/progress.md` があれば、① クレジット受取を「済」に更新する（コードそのものは書かない）。無ければ作らず、/ai-challenge-kit:challenge を勧める。
 
