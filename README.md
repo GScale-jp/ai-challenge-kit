@@ -10,6 +10,8 @@ Google の AI コーディング環境 Antigravity のプラグインです。Go
 - 5分の LT（短い発表）用のスライドを作る
 - Google Cloud クレジットの受け取りと有効化を案内する
 
+使い方の動画（3分）: https://drive.google.com/file/d/18f6uWWWGPQ-Zk7yyZLBJwRM6qfP_4CUJ/view
+
 応募条件は公式ページ https://googlejp25.withgoogle.com/awards/ に基づきます。提出物は、90秒以内のデモ動画（自分の YouTube に限定公開）と応募フォームです。審査はアイデア本位で、アプリの完成度は問われません。
 
 ## 最初の5分
