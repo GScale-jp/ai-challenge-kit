@@ -163,7 +163,7 @@ test('秒数の検査だけを実行できる', async (t) => {
 
 test('台本末尾の場面データを読み取り、秒数と操作の違反を検出する', async () => {
   const markdown = await readFile(good, 'utf8');
-  const data = parseScenes(markdown.replaceAll('\n', '\r\n'));
+  const data = parseScenes(markdown.replace(/\r?\n/g, '\r\n'));
   assert.deepEqual(validate(data), []);
   assert.equal(totalSeconds(data), 20);
   assert.equal(totalSeconds({ scenes: data.scenes }), 25);
@@ -185,6 +185,6 @@ test('台本末尾の場面データを読み取り、秒数と操作の違反�
 
 test('スキルの名前と使いどきが正しく、禁止語が入っていない', async () => {
   const skill = await readFile(new URL('../SKILL.md', import.meta.url), 'utf8');
-  assert.match(skill, /^---\nname: make-video\ndescription: [^\n]+と言われたとき、または \/ai-challenge-kit:make-video と入力されたときに使う。\n---\n/);
+  assert.match(skill, /^---\r?\nname: make-video\r?\ndescription: [^\r\n]+と言われたとき、または \/ai-challenge-kit:make-video と入力されたときに使う。\r?\n---\r?\n/);
   assert.doesNotMatch(skill, /argon|codex|agy-run|gws|GScale|ジースケール/i);
 });

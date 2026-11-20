@@ -118,7 +118,7 @@ test('必須項目、見出し、スライド枚数、URL を確認する', asyn
 
 test('スキルの名前と使いどきが正しく、禁止語が入っていない', async () => {
   const skill = await readFile(new URL('../SKILL.md', import.meta.url), 'utf8');
-  assert.match(skill, /^---\nname: lt-slides\ndescription: [^\n]+と言われたとき、または \/ai-challenge-kit:lt-slides と入力されたときに使う。\n---\n/);
+  assert.match(skill, /^---\r?\nname: lt-slides\r?\ndescription: [^\r\n]+と言われたとき、または \/ai-challenge-kit:lt-slides と入力されたときに使う。\r?\n---\r?\n/);
   assert.doesNotMatch(skill, /argon|codex|agy-run|gws|GScale|ジースケール/i);
 });
 
